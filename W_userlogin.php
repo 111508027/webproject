@@ -1,5 +1,6 @@
 <?php
-    session_start();
+
+    include_once "W_configlang.php";
     if(isset($_SESSION['uname'])) {
         if((time() - $_SESSION['logintime']) > 500) {
                 header("location:W_logout.php");
@@ -150,14 +151,23 @@
 <nav class="navbar navbar-inverse" >
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" >BOOKATRUCK</a>
+      <a class="navbar-brand" ><?php echo $lang['book_a_truck']?></a>
     </div>
     <ul class="nav navbar-nav"></ul>
 
     <ul class="nav navbar-nav navbar-right">
         
-        <li><a href="explore.php"><span class = "glyphicon glyphicon-log-in"></span>Home</a></li>
-        <li><a href="W_logout.php"><span class = "glyphicon glyphicon-log-in"></span>LogOut</a></li>
+        <li><a href="explore.php"><span class = "glyphicon glyphicon-log-in"></span><?php echo $lang['home']?></a></li>
+        <li><a href="W_logout.php"><span class = "glyphicon glyphicon-log-in"></span><?php echo $lang['logout']?></a></li>
+        <div>
+			<label>Languages</label>
+			    <select onchange= "window.location.href = this.value;">
+            	    <option value ="W_userlogin.php?lang=en" <?php echo $_SESSION['lang'] === "en" ? "selected" : "";?>><?php echo $lang['lang_en'] ?></option>
+            	    <option value = "W_userlogin.php?lang=mr" <?php echo $_SESSION['lang'] === "mr" ? "selected" : "";?>><?php echo $lang['lang_mr'] ?></option>
+            	    <option value = "W_userlogin.php?lang=hn" <?php echo $_SESSION['lang'] === "hn" ? "selected" : "";?>><?php echo $lang['lang_hn'] ?></option>
+                </select>
+                
+    	</div>
     </ul>
 
   </div>
@@ -166,11 +176,11 @@
     <div id="about" class="container-fluid">
         <div class="row">
             <div class="col-sm-8">
-                <h2><button style="width:auto;" onclick= "placeorder()">Place Your Order</button></h2>
+                <h2><button style="width:auto;" onclick= "placeorder()"><?php echo $lang['placeorder']?></button></h2>
                 <h3>You can place your order here:</h3><br>
-                <h2><button style="width:auto;" onclick= "ratecalculate()">Calculate The Probable Rate of</button></h2>
-                <h3>Calculate rate:</h3><br><br>
-                <p><h2>For order and bills click here:</h2></p>
+                <h2><button style="width:auto;" onclick= "ratecalculate()"><?php echo $lang['calculate_rate']?></button></h2>
+                <h3><?php echo $lang['calculate_rate']?></h3><br><br>
+                <p><h2><?php echo $lang['for_orders_and_bills']?>:</h2></p>
                 <h2><a href = "rate1.php">Click Here</a></h2>
                 
             </div>
@@ -183,37 +193,37 @@
 			<div class = "panel-body">
 				<form action= "W_userlogin.php" name = "orderform" method = "post" onsubmit = "ordercheck()">
 					<div class = "form-group">
-						<label for = "vehicletype">Choose Vehicle:</label>
+						<label for = "vehicletype"><?php echo $lang['choose_vehicle']?>:</label>
 						<select class = "form-control" name = "vehicletype" id = "vehicletype">
-							<option>Truck</option>
-							<option>Tempo</option>
-							<option>Minitruck</option>
+							<option value = "Truck"><?php echo $lang['truck']?></option>
+							<option value = "Tempo"><?php echo $lang['tempo']?></option>
+							<option value = "Minitruck"><?php echo $lang['mini_truck']?></option>
 						</select>
 			
-						<label for = "goods">Type of Goods:</label>
+						<label for = "goods"><?php echo $lang['type_of_goods']?>:</label>
 							<select class = "form-control" name = "goods" id = "goods">
 							<option>Construction material</option>
 							<option>Grains</option>
 							<option>Grocery</option>
 						</select>
-						<label for = "orderquantity">Quantity</label>
+						<label for = "orderquantity"><?php echo $lang['quantity']?></label>
 						<input type = "number" class = "form-control" name = "orderquantity" id = "orderquantity">
-						<label for = "yourname">Name:</label>
+						<label for = "yourname"><?php echo $lang['name']?></label>
 						<input type = "text" class = "form-control" name = "yourname" id = "yourname" >
 						
-						<label for = "youremail">Email:</label>
+						<label for = "youremail"><?php echo $lang['email']?></label>
 						<input type = "email"  class = "form-control" name = "youremail" id = "youremail" >
-						<label for = "mobilenumber">Mobile Number:</label>
+						<label for = "mobilenumber"><?php echo $lang['mobile_Number']?></label>
 						<input type = "number" class = "form-control" name = "mobilenumber" id = "mobilenumber" maxlength = "10" size = "5" >
-						<label for = "deladdress">Delivery Address</label>
+						<label for = "deladdress"><?php echo $lang['delivery_address']?></label>
 						<input type = "textarea" class = "form-control" name = "deladdress" id = "daddress" placeholder = "address">
 						
-						<label for = "scity">Source</label><!-- add ajax here-->
+						<label for = "scity"><?php echo $lang['source']?></label><!-- add ajax here-->
 						<input type = "text" class = "form-control" name = "scity" id = "scity" value = "Pune" readonly>
-						<label for = "city">City</label><!-- add ajax here-->
+						<label for = "city"><?php echo $lang['city']?></label><!-- add ajax here-->
 						<input type = "text" class = "form-control" name = "city" id = "city" >
 						<div id = "citylist"></div>
-						<label for = "pincode">Pincode</label>
+						<label for = "pincode"><?php echo $lang['pincode']?></label>
 						<input type = "number" class = "form-control" name = "pincode" id = "pincode" maxlength = "6" size = "6"><br>
 
 						<input type = "submit" name = "placeorder" value = "Placeorder">
@@ -229,22 +239,22 @@
 			<div class = "panel-body">
 				<form method = "post">
 					<div class = "form-group">
-						<label for = "goods">Quantity</label>
+						<label for = "goods"><?php echo $lang['veh_type']?></label>
 						<select class = "form-control" name = "vehicleneed" id = "vehicleneed">
-							<option>Truck</option>
-							<option>Tempo</option>
-							<option>Minitruck</option>
+                            <option value = "Truck"><?php echo $lang['truck']?></option>
+							<option value = "Tempo"><?php echo $lang['tempo']?></option>
+							<option value = "Minitruck"><?php echo $lang['mini_truck']?></option>
 						</select>
-						<label for = "squantity">Quantity</label><!-- add ajax here-->
+						<label for = "squantity"><?php echo $lang['quantity']?></label><!-- add ajax here-->
 							<input type = "number" class = "form-control" name = "squantity" id = "squantity">
-						<label for = "city">Source</label><!-- add ajax here-->
+						<label for = "city"><?php echo $lang['source']?></label><!-- add ajax here-->
 							<input type = "text" class = "form-control" name = "source1" id = "source1" value = "Pune" readonly>
-						<label for = "city">Destination</label><!-- add ajax here-->
+						<label for = "city"><?php echo $lang['destination']?></label><!-- add ajax here-->
                             <input type = "text" class = "form-control" name = "destination1" id = "destination1" >
                             <div id = "destlist"></div>
 						<!-- Suggestion of vehicle to be added according to need-->
 						<div class = "checkbox">
-							<label><input type = "checkbox" name = "fastdelivery" id ="fastdelivery">Urgent delivery needed</label>
+							<label><input type = "checkbox" name = "fastdelivery" id ="fastdelivery"><?php echo $lang['urgent_delivery_needed']?></label>
 							
 						</div>
 						<input type = "submit" name = "calculate" value = "Calculate Rate">

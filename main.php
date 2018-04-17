@@ -1,10 +1,10 @@
 
 <?php
     include_once "W_config.php";
+    include_once "W_configlang.php";
 ?>
 
 <?php
-    session_start();
     if(isset($_POST['signup'])) {
 		$name = $_POST['name'];
         $username = $_POST['userName'];
@@ -477,7 +477,6 @@ span.psw {
     }
   }
   </style>
-
 </head>
 <body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
 
@@ -489,23 +488,33 @@ span.psw {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>                        
       </button>
-      <a class="navbar-brand"  href="#myPage">BOOK A TRUCK</a>
+      <a class="navbar-brand"  href="#myPage"><?php echo $lang['book_a_truck']?></a>
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#about">About</a></li>
-        <li><a href="#faq">FAQ</a></li>
-        <li><a href="#contact">Contacts</a></li>
-        <li><button  onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Login</button></li>
-        <li><button onclick="document.getElementById('id02').style.display='block'" style="width:auto;">SignUp</button></li>
+        <li><a href="#about"><?php echo $lang['about']?></a></li>
+        <li><a href="#faq"><?php echo $lang['faq']?></a></li>
+        <li><a href="#contact"><?php echo $lang['contact']?></a></li>
+        <a><?php echo $lang['logged_in']?></a>
+        <li><button  onclick="document.getElementById('id01').style.display='block'" style="width:auto;"><?php echo $lang['login']?></button></li>
+        <li><button onclick="document.getElementById('id02').style.display='block'" style="width:auto;"><?php echo $lang['signup']?></button></li>
       </ul>
-    </div>
+      <div>
+			<label>Languages</label>
+			    <select onchange= "window.location.href = this.value;">
+            	    <option value ="main.php?lang=en" <?php echo $_SESSION['lang'] === "en" ? "selected" : "";?>><?php echo $lang['lang_en'] ?></option>
+            	    <option value = "main.php?lang=mr" <?php echo $_SESSION['lang'] === "mr" ? "selected" : "";?>><?php echo $lang['lang_mr'] ?></option>
+            	    <option value = "main.php?lang=hn" <?php echo $_SESSION['lang'] === "hn" ? "selected" : "";?>><?php echo $lang['lang_hn'] ?></option>
+                </select>
+                
+    	</div>
+</div>
   </div>
 </nav>
 
 <div class="jumbotron text-center">
-  <h1>BOOK A TRUCK</h1> 
-  <p>Door Step Delivery</p> 
+  <h1><?php echo $lang['book_a_truck']?></h1> 
+  <p><?php echo $lang['doorstep_delivery']?></p> 
 </div>
 
  
@@ -572,15 +581,14 @@ span.psw {
   </form>
 </div>
 
-
 <!-- Container (About Section) -->
 <div id="about" class="container-fluid">
   <div class="row">
     <div class="col-sm-8">
-      <h2>About BOOK A TRUCK</h2><br>
-      <p style="margin-bottom:20px;text-align:justify;"><span style="font-size: larger;">BOOK A TRUCK is a unified marketplace which connects load owners, truck/fleet owners, transport intermediaries, transport companies, packers and movers and others for efficient movement of goods. With a state-of-the-art web and mobile platform, and a fast growing user base, BOOK A TRUCK is making Transportation of goods social, time-saving and convenient by providing numerous options to choose from.</span></p>
-      <p style="margin-bottom:20px;text-align:justify;"><span style="font-size: larger;">BOOK A TRUCK intends to organise the sector of transportation of goods by bringing the consignors and transporters together for exchange of available loads and trucks and providing the flexibility to select any available load or truck. The transporters are verified and our two way rating &amp; review system ensures users reliability and trustworthiness.</span></p>  <br>
-      <button class="btn btn-default btn-lg">Get in Touch</button>
+      <h2><?php echo $lang['about_book_a_truck']?></h2><br>
+      <p style="margin-bottom:20px;text-align:justify;"><span style="font-size: larger;"><?php echo $lang['about_section1']?></span></p>
+      <p style="margin-bottom:20px;text-align:justify;"><span style="font-size: larger;"><?php echo $lang['about_section2']?></span></p><br>
+      <button class="btn btn-default btn-lg" onclick="window.location.href='../tempo/WST/W_userlogin.php'"><?php echo $lang['get_in_touch']?></button>
     </div>
     <div class="col-sm-4">
       <span class="glyphicon glyphicon-signal logo"></span>
@@ -594,42 +602,42 @@ span.psw {
       <span class="glyphicon glyphicon-globe logo slideanim"></span>
     </div>
     <div class="col-sm-8">
-      <h2>Our Values</h2><br>
-      <h4><strong>MISSION:</strong>We aim to deliver quality service at competitive price and back up every shipment with latest technology & outstanding customer service.We at BOOK A TRUCK try to support our customers for their customized requirements which are not feasible for a local transporter.</h4><br>
-      <p><strong>VISION:</strong> We are proud to say that our modernistic way of truck hiring service & fleet solutions bestow the way people used to hire transport solutions and our mobile enabled technology seamlessly communicates with our immense network of truck operators to bring in a responsive value stream. Our partner operators are verified and trained to deliver a reliable & trustworthy service to achieve a higher customer satisfaction. BOOK A TRUCK is tugged in a revolutionary way by a group of technology fanatics & logistics experts having wealth of experience and a thorough knowledge of this unique platform and strive hard to serve the freight market in an efficient way. Now no more haggle or wrangle for transporting your goods and we would like say that it's time to "Truck it Easy" with BOOK A TRUCK</p>
+      <h2><?php echo $lang['our_values']?></h2><br>
+      <h4><strong><?php echo $lang['mission']?></strong><?php echo $lang['mission_section']?></h4><br>
+      <p><strong><?php echo $lang['vision']?></strong><?php echo $lang['vision_section']?></p>
     </div>
   </div>
 </div>
 
-<!-- Container (Portfolio Section) -->
 <div id="portfolio" class="container-fluid text-center bg-grey">
-  <h2>Portfolio</h2><br>
-  <h4>Where we are </h4>
+  <h2><?php echo $lang['portfolio']?></h2><br>
+  <h4><?php echo $lang['what_we_have_created']?></h4>
   <div class="row text-center slideanim">
     <div class="col-sm-4">
       <div class="thumbnail">
         <img src="pune.jpg" alt="Paris" width="400" height="300">
-        <p><strong>Pune</strong></p>
-        <p>Yes, we are in Pune</p>
+        <p><strong><?php echo $lang['pune']?></strong></p>
+        <p><?php echo $lang['punesec']?></p>
       </div>
     </div>
     <div class="col-sm-4">
       <div class="thumbnail">
         <img src="mumbai.jpg" alt="New York" width="400" height="300">
-        <p><strong>Mumbai</strong></p>
-        <p>We reach to  Mumbai</p>
+        <p><strong><?php echo $lang['mumbai']?></strong></p>
+        <p><?php echo $lang['mumbaisec']?></p>
       </div>
     </div>
     <div class="col-sm-4">
       <div class="thumbnail">
         <img src="aurangabad.jpg" alt="San Francisco" width="400" height="300">
-        <p><strong>Aurangabad</strong></p>
-        <p>Yes, Aurangabad is ours</p>
+        <p><strong><?php echo $lang['aurangabad']?></strong></p>
+        <p><?php echo $lang['aurasec']?></p>
       </div>
     </div>
   </div><br>
   
-  <h2>What our customers say</h2>
+  
+  <h2><?php echo $lang['what_our_customers_say']?></h2>
   <div id="myCarousel" class="carousel slide text-center" data-ride="carousel">
     <!-- Indicators -->
     <ol class="carousel-indicators">
@@ -641,13 +649,13 @@ span.psw {
     <!-- Wrapper for slides -->
     <div class="carousel-inner" role="listbox">
       <div class="item active">
-        <h4>"This company is the best. I am so happy with the result!"<br><span>Michael Roe, Vice President, Comment Box</span></h4>
+        <h4><?php echo $lang['comment1']?><br><span><?php echo $lang['by1']?></span></h4>
       </div>
       <div class="item">
-        <h4>"One word... WOW!!"<br><span>John Doe, Salesman, Rep Inc</span></h4>
+        <h4><?php echo $lang['comment2']?><br><span><?php echo $lang['by2']?></span></h4>
       </div>
       <div class="item">
-        <h4>"Could I... BE any more happy with this company?"<br><span>Chandler Bing, Actor, FriendsAlot</span></h4>
+        <h4><?php echo $lang['comment3']?><br><span><?php echo $lang['by3']?></span></h4>
       </div>
     </div>
 
@@ -667,48 +675,34 @@ span.psw {
     <div class="row">
         <div class="col-sm-8">
 <h2>FAQ</h2>
-<button class="question">1. What is BOOK A TRUCK?</button>
+<button class="question"><?php echo $lang['que1']?></button>
 <div class="answer">
-  <p>BOOK A TRUCK is a unified marketplace which connects load owners, truck/fleet owners, transport in-termediaries, transport companies, packers and movers and others for exchange of available loads and trucks and provides the flexibility to select any available load or truck.</p>
+  <p><?php echo $lang['ans1']?></p>
 </div>
 
-<button class="question">2. How Does BOOK A TRUCK Work?</button>
+<button class="question"><?php echo $lang['que2']?></button>
 <div class="answer">
-  <p>BOOK A TRUCK is a two-way working platform.Consignors / Transporters posts a load / truck at the portal and gets instant matches as per the available trucks / loads already posted by other Consignors / Transporters. Consignor also has the option to contact transporters available as per the load details in surrounding areas.</p>
+  <p><?php echo $lang['ans2']?></p>
 </div>
 
-<button class="question">3. Who can Post a Load/Truck? </button>
+<button class="question"><?php echo $lang['que3']?></button>
 <div class="answer">
-  <p><b>Load</b>: Any Person or Entity that has a load of material to be delivered from one place to another. The Person or Entity can be the Owner of the Load or can be an Associate to the Owner of the Load.
-<b>Truck</b>: Transporters like Transport Company or Agency, Truck Owner, Fleet Owner, Truck Brokers, Packers & Movers, Business Owner that has a Truck available for movement from one place to another</p>
+  <p><?php echo $lang['ans3']?></p>
 </div>
 
-<button class="question">4. Why do I need to signup, and is it Free? </button>
+<button class="question"><?php echo $lang['que4']?></button>
 <div class="answer">
-  <p>You do not need to sign-up as a user in order to search for a Truck/Load. When you find a Load/Truck that you are interested in and you want to contact the other user, you will then need to join BOOK A TRUCK (only registered users can contact other users).
-It is completely free, quick and easy to join BOOK A TRUCK for a Consignor. However, to register as a Transporter, some detailed information is required.</p>
+  <p><?php echo $lang['ans4']?></p>
 </div>
 
-<button class="question">5. How do we contact the Consignor/Transporter?</button>
+<button class="question"><?php echo $lang['que5']?></button>
 <div class="answer">
-  <p><b>Users can get in touch in two ways</b>:
-
-<b>1. By private messages</b> - recommended for initial contact
-BOOK A TRUCK has a private, internal messaging service, which allows you to get in touch with and re-spond to all users easily and free of charge, without ever disclosing your email. When another user sends you a private message you can easily find out more about them - just open the message and then click on their photo to go to their profile. When you receive a message from another user, you’ll get a notification from BOOK A TRUCK.
-
-<b>2. By phone</b>
-We strongly recommend that you make a quick phone call to a user, at least the day before your load pickup/truck departure, to confirm last minute details. All our users are required to verify their mobile phone number so that we know that they will be reachable on this occasion. However, it is not mandatory to show your number to other users.</p>
+  <p><?php echo $lang['ans5']?></p>
 </div>
 
-<button class="question">5. How do Pricing and Payment work?</button>
+<button class="question"><?php echo $lang['que6']?></button>
 <div class="answer">
-  <p>Prices may/may not be negotiable and are offered by Transporters when they post a available truck or accept a available load. BOOK A TRUCK allow only verified and registered Transporters on its portal which ensures the prices are competitive.
-Terms of Payments is decided between the Consignor and Transporter as per their mutual agree-ment. BOOK A TRUCK is not involved in any payment transaction.</p>
-</div>
-
-<button class="question">6. Does BOOK A TRUCK provide guarantee accuracy, timelines, safety and completeness of the transaction?</button>
-<div class="answer">
-  <p>BOOK A TRUCK is a unified marketplace connecting different types of goods transporters and consignors to carry a transaction as per mutually agreed terms & conditions. We do not guarantee accuracy, timelines, safety and completeness of the transaction. However, it is our endeavour to bring only the verified and trusted users on our portal.</p>
+  <p><?php echo $lang['ans6']?></p>
 </div>
 
 </div>
@@ -739,7 +733,7 @@ for (i = 0; i < acc.length; i++) {
             <h2 class="text-center">CONTACT</h2>
             <div class="row">
                 <div class="col-sm-5">
-                    <p>Contact us and we'll get back to you within 24 hours.</p>
+                    <p><?php echo $lang['contact_info']?></p>
                     <p><span class="glyphicon glyphicon-map-marker"></span> Pune</p>
                     <p><span class="glyphicon glyphicon-phone"></span>+91 9075592263</p>
                     <p><span class="glyphicon glyphicon-phone"></span>+91 8237397699</p>
