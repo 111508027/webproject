@@ -33,8 +33,8 @@ function Footer()
 
 $mysqli = new dbObj();
 $connString =  $mysqli->getConnstring();
-$display_heading = array('billid'=>'ID', 'orderid'=> 'OrderID', 'vehicletype'=> 'Vehical','goods'=> 'Goods', 'orderquantity'=>'OrderQuantity', 'rate' => 'Rate', 'amount' => 'Amount', 'taxes' => 'Taxes', 'totalamount' => 'TotalAmount');
-$result = mysqli_query($connString, "SELECT billid, orderid, vehicletype, goods, orderquantity, rate, amount, taxes, totalamount FROM billinfo  order by billid desc limit 1") or die("database error:". mysqli_error($connString));
+$display_heading = array('user' => 'User', 'billid'=>'ID', 'orderid'=> 'OrderID', 'vehicletype'=> 'Vehical','goods'=> 'Goods', 'orderquantity'=>'OrderQuantity', 'rate' => 'Rate', 'amount' => 'Amount', 'taxes' => 'Taxes', 'totalamount' => 'TotalAmount');
+$result = mysqli_query($connString, "SELECT user, billid, orderid, vehicletype, goods, orderquantity, rate, amount, taxes, totalamount FROM billinfo  order by billid desc limit 1") or die("database error:". mysqli_error($connString));
 $header = mysqli_query($connString, "SHOW columns FROM billinfo");
 
 $pdf = new PDF();
