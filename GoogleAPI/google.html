@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Search On Map</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <style>
+        #map {
+            height: 100%;
+        }
+        
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        
+        #google {
+            position: absolute;
+            top: 40px;
+            left: 0.7%;
+            z-index: 5;
+            background-color: rgb(65, 201, 243);
+            padding: 5px;
+            border: 1px solid #999;
+            text-align: center;
+            font-family: 'sans-serif';
+            line-height: 30px;
+            padding-left: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="google">
+        <input id="address" type="textbox" value="" placeholder="Pune, Maharashtra">
+        <input id="submit" type="button" value="Search Location">
+    </div>
+    <div id="map"></div>
+    <script>
+        function initMap() {
+            var map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 8,
+            });
+            var geocoder = new google.maps.Geocoder();
+
+            var input = document.getElementById("address");
+            input.addEventListener("keyup", function(event) {
+                event.preventDefault();
+                if (event.keyCode === 13) {
+                    document.getElementById("submit").click();
+                }
+            });
+            document.getElementById('submit').addEventListener('click', function() {
+                geocodeAddress(geocoder, map);
+            });
+        }
+
+        function geocodeAddress(geocoder, resultsMap) {
+            var address = document.getElementById('address').value;
+            geocoder.geocode({
+                'address': address
+            }, function(results, status) {
+                if (status === 'OK') {
+                    resultsMap.setCenter(results[0].geometry.location);
+                    var marker = new google.maps.Marker({
+                        map: resultsMap,
+                        position: results[0].geometry.location
+                    });
+                } else {
+                    alert('Please Enter the Address correctly ' + status);
+                }
+            });
+        }
+    </script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB5UQObku61O2NXIaG6DOMUmF65ft8GZPs
+    &callback=initMap">
+    </script>
+</body>
+
+</html>
